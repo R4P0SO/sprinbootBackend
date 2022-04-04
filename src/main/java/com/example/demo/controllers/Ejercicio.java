@@ -4,11 +4,13 @@ import java.text.MessageFormat;
 
 import com.example.demo.utils.Utils;
 
-import org.apache.logging.log4j.message.Message;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+//import org.apache.logging.log4j.message.Message;
+import org.springframework.web.bind.annotation.*;
+//import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Ejercicio{
@@ -34,5 +36,10 @@ public class Ejercicio{
         Object params[] = {num1, num2, resultado};
       return MessageFormat.format("la suma de {0} y {1} es {2}", params);
     }
+    /*@PostMapping("/saveProductOnDisk")
+    public String saveProductOnDisk(){
+        
+        return
 
+    }*/
 }
