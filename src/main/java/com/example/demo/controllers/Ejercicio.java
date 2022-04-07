@@ -1,13 +1,16 @@
 package com.example.demo.controllers;
 
-import java.io.FileWriter;
+
+
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.MessageFormat;
 import java.util.Map;
 
+import com.example.demo.models.Person;
+import com.example.demo.services.RickAndMortyService;
 import com.example.demo.utils.Utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
 //import org.apache.logging.log4j.message.Message;
 import org.springframework.web.bind.annotation.*;
 //import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +21,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class Ejercicio{
+    @Autowired
+    RickAndMortyService rickAndMortyService;
+
     @GetMapping("/")
     public String greet(){
         return "bienvenido al servidor";
@@ -58,22 +64,40 @@ public class Ejercicio{
             if(Integer.parseInt(priceValue) < 0){
                 return "Error el precio es negativo";
         }
+        /*
         FileWriter fw = null;
         PrintWriter pw = null;
         try {
             fw = new FileWriter("datos.txt");
             pw = new PrintWriter(fw);
-            pw.print(articleValue);
-            pw.print(",");
-            pw.print(priceValue);
-            pw.print("\n");
+            pw.print(articleValue+","+priceValue+"\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error al escribir en disco";
+        } finally{
+            pw.close();
+        }*/
+        try {
+            Utils.save("datos.txt", articleValue+","+priceValue+"\n");
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            return "Error al escribir en disco";
-        }finally{
-            pw.close();
+            return "Error al guardar en disco";
         }
+        
         return "produc guardado correct";
+    }
+    @DeleteMapping("/removeFile")
+    public String removeFile(){
+        boolean result = Utils.remove("datos.txt");
+        return result ? "borrado correcto" : "no se puede borrar";
+    } 
+    @GetMapping("/rickandmorty/random")
+    public String getRickAndMortyRandomCharacter(){
+        Person c = rickAndMortyService.getCharacterFromAPI();
+        return "<img src='"+c.image+"'/>"+"<h2> "+c.name+"</h2>";
+        //return MessageFormat.format("<img src='{0}'/>", c.image);
+
+
     }
 } 
