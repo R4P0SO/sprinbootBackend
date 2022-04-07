@@ -4,6 +4,7 @@ package com.example.demo.controllers;
 
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Map;
 
 import com.example.demo.models.Person;
@@ -95,9 +96,20 @@ public class Ejercicio{
     @GetMapping("/rickandmorty/random")
     public String getRickAndMortyRandomCharacter(){
         Person c = rickAndMortyService.getCharacterFromAPI();
-        return "<img src='"+c.image+"'/>"+"<h2> "+c.name+"</h2>";
+        return "<img src='"+c.image+"'/>"+"<h2>"+c.name+"</h2>";
         //return MessageFormat.format("<img src='{0}'/>", c.image);
 
+
+    }
+    @GetMapping("/rickandmorty/list")
+    public String getRickAndMortyList(){
+        String web = "<h1>Lista de personas</h1>";
+        ArrayList<Person> persons = rickAndMortyService.getCharactersFromAPI();
+        for(Person person : persons){
+            web+="<img src='"+person.image+"'/>";
+        }
+        return web;
+    
 
     }
 } 
