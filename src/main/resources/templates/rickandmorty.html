@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .marco{ 
+        .marco{
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             display: flex;
             flex-direction: column;
             width: 30%;
             margin-bottom: 10px;
-        
         }
     </style>
 </head>
@@ -20,8 +19,7 @@
     <h1>Lista de personajes</h1>
     <div class="marco" th:each="person: ${persons}">
         <h4 th:text="${person.name}"></h4>
-        <img th:src="${person.image}" alt="">
+        <img th:src="${person.image}">
     </div>
-   
 </body>
 </html>

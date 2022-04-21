@@ -112,4 +112,9 @@ public class Ejercicio{
     
 
     }
+    @GetMapping("/chiste")
+    public String addJoke(@RequestParam String text){
+        // INSERT INTO joke (text) VALUES('XXXXXX')
+        return "";
+    }
 } 
